@@ -15,6 +15,7 @@ using ParkyAPI.Data;
 using ParkyAPI.Repository;
 using ParkyAPI.Repository.IRepository;
 using AutoMapper;
+using ParkyAPI.ParkyMapper;
 
 namespace ParkyAPI
 {
@@ -36,7 +37,7 @@ namespace ParkyAPI
                 options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<INationalParkRepository, NationalParkRepository>();
-            services.AddAutoMapper(typeof(ParkyMapper));
+            services.AddAutoMapper(typeof(ParkyMappings));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
