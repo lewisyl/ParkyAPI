@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ParkyAPI.Data;
 using ParkyAPI.Models;
+using ParkyAPI.Models.Dtos;
 using ParkyAPI.Repository.IRepository;
 
 namespace ParkyAPI.Repository
@@ -17,12 +18,12 @@ namespace ParkyAPI.Repository
             _db = db;
         }
 
-        public ICollection<NationalParkDto> GetNationalParks()
+        public ICollection<NationalPark> GetNationalParks()
         {
             return _db.NationalParks.OrderBy(park => park.Name).ToList();
         }
 
-        public NationalParkDto GetNationalPark(int nationalParkId)
+        public NationalPark GetNationalPark(int nationalParkId)
         {
             return _db.NationalParks.FirstOrDefault(park => park.Id == nationalParkId);
         }
@@ -39,19 +40,19 @@ namespace ParkyAPI.Repository
             return result;
         }
 
-        public bool CreateNationalPark(NationalParkDto nationalPark)
+        public bool CreateNationalPark(NationalPark nationalPark)
         {
             _db.NationalParks.Add(nationalPark);
             return Save();
         }
 
-        public bool UpdateNationalPark(NationalParkDto nationalPark)
+        public bool UpdateNationalPark(NationalPark nationalPark)
         {
             _db.NationalParks.Update(nationalPark);
             return Save();
         }
 
-        public bool DeleteNationalPark(NationalParkDto nationalPark)
+        public bool DeleteNationalPark(NationalPark nationalPark)
         {
             _db.NationalParks.Remove(nationalPark);
             return Save();
