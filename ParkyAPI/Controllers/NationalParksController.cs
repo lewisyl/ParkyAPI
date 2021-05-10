@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using ParkyAPI.Models.Dtos;
 using ParkyAPI.Repository.IRepository;
 
 
@@ -25,7 +26,12 @@ namespace ParkyAPI.Controllers
         public IActionResult GetNationalParks()
         {
             var objList = _npRepo.GetNationalParks();
-            return Ok(objList);
+            var objDto = new List<NationalParkDto>();
+            foreach (var obj in objList)
+            {
+                objDto.Add(_mapper.Map<NationalParkDto>(obj));
+            }
+            return Ok(objDto);
         }
     }
 }
